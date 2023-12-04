@@ -1,3 +1,4 @@
+import 'package:doctor_appointment/features/on_boarding/presentation/widgets/onBoardingBody.dart';
 import 'package:flutter/material.dart';
 
 class OnBoarding extends StatelessWidget {
@@ -5,8 +6,6 @@ class OnBoarding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-    );
+    return const OnBoardingScreenBody();
   }
 }
