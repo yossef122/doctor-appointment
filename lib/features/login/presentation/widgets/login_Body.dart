@@ -1,8 +1,8 @@
 import 'package:doctor_appointment/core/helpers/spacing.dart';
 import 'package:doctor_appointment/core/themes/styles.dart';
 import 'package:doctor_appointment/core/widgets/app_button.dart';
-import 'package:doctor_appointment/core/widgets/app_text_formField.dart';
 import 'package:doctor_appointment/features/login/presentation/widgets/alreadyHaveAccount.dart';
+import 'package:doctor_appointment/features/login/presentation/widgets/email_and_password.dart';
 import 'package:doctor_appointment/features/login/presentation/widgets/terms_and_conditions_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,9 +15,9 @@ class LoginScreenBody extends StatefulWidget {
 }
 
 class _LoginScreenBodyState extends State<LoginScreenBody> {
-  final formKey = GlobalKey<FormState>();
-
-  bool isObscureText = true;
+  // final formKey = GlobalKey<FormState>();
+  //
+  // bool isObscureText = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,48 +37,29 @@ class _LoginScreenBodyState extends State<LoginScreenBody> {
               style: TextStyles.font14GrayRegular,
             ),
             verticalSpace(36),
-            Form(
-              key: formKey,
-              child: Column(
-                children: [
-                  const AppTextFormField(
-                    hintText: "email",
+            Column(
+              children: [
+                const EmailAndPassword(),
+                verticalSpace(24),
+
+                Align(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Text(
+                    "forget Password",
+                    style: TextStyles.font13blueRegular,
                   ),
-                  verticalSpace(16),
-                  AppTextFormField(
-                    hintText: "Password",
-                    isObscureText: isObscureText,
-                    suffixIcon: IconButton(
-                      icon: Icon(isObscureText
-                          ? Icons.visibility
-                          : Icons.visibility_off),
-                      onPressed: () {
-                        setState(() {
-                          isObscureText = !isObscureText;
-                        });
-                      },
-                    ),
-                  ),
-                  verticalSpace(24),
-                  Align(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Text(
-                      "forget Password",
-                      style: TextStyles.font13blueRegular,
-                    ),
-                  ),
-                  verticalSpace(24),
-                  AppTextButton(
-                    buttonText: 'login',
-                    textStyle: TextStyles.font16WhiteSemiBold,
-                    onPressed: () {},
-                  ),
-                  verticalSpace(16),
-                  const TermsAndConditionsText(),
-                  verticalSpace(60),
-                  const AlreadyHaveAccountText(),
-                ],
-              ),
+                ),
+                verticalSpace(24),
+                AppTextButton(
+                  buttonText: 'login',
+                  textStyle: TextStyles.font16WhiteSemiBold,
+                  onPressed: () {},
+                ),
+                verticalSpace(16),
+                const TermsAndConditionsText(),
+                verticalSpace(60),
+                const AlreadyHaveAccountText(),
+              ],
             )
           ],
         ),
