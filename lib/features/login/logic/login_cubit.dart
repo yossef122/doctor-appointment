@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   final LoginRepo _loginRepo;
-    TextEditingController passwordController=TextEditingController();
-    TextEditingController emailController=TextEditingController();
+
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+
   final formKey = GlobalKey<FormState>();
 
   LoginCubit(this._loginRepo) : super(const LoginState.initial());
-
-
 
   void emitLoadingStates(LoginRequestBody loginRequestBody) async {
     emit(const LoginState.loading());
@@ -25,7 +25,7 @@ class LoginCubit extends Cubit<LoginState> {
       },
       failure: (error) => {
         emit(
-          LoginState.error(error: error.failure.message ?? ""),
+          LoginState.error(error: error.apiErrorModel.message ?? ""),
         )
       },
     );

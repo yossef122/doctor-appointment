@@ -1,5 +1,6 @@
 import 'package:doctor_appointment/core/app_routes/Routes.dart';
 import 'package:doctor_appointment/core/di/dependency_injection.dart';
+import 'package:doctor_appointment/features/home/presentation/home_screen.dart';
 import 'package:doctor_appointment/features/login/logic/login_cubit.dart';
 import 'package:doctor_appointment/features/login/presentation/login.dart';
 import 'package:doctor_appointment/features/on_boarding/presentation/on_boarding.dart';
@@ -22,6 +23,10 @@ class AppRouter {
             create: (context) => getIt<LoginCubit>(),
             child: const Login(),
           ),
+        );
+     case Routes.homeScreen:
+        return MaterialPageRoute(
+          builder: (_) => const HomeScreen(),
         );
       default:
         return MaterialPageRoute(

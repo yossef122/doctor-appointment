@@ -1,3 +1,4 @@
+import 'package:doctor_appointment/core/helpers/app_regex.dart';
 import 'package:doctor_appointment/core/helpers/spacing.dart';
 import 'package:doctor_appointment/core/widgets/app_text_formField.dart';
 import 'package:doctor_appointment/features/login/logic/login_cubit.dart';
@@ -25,6 +26,20 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   void initState() {
     super.initState();
     passwordController = context.read<LoginCubit>().passwordController;
+    setUpPasswordControllerListener();
+  }
+
+  void setUpPasswordControllerListener() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowercase = AppRegex.hasLowerCase(passwordController.text);
+        hasUppercase = AppRegex.hasUpperCase(passwordController.text);
+        hasSpecialCharacters =
+            AppRegex.hasSpecialCharacter(passwordController.text);
+        hasNumber = AppRegex.hasNumber(passwordController.text);
+        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+      });
+    });
   }
 
   @override
@@ -36,7 +51,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           AppTextFormField(
             hintText: "email",
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isEmailValid(value)) {
                 return 'please enter a valid email';
               }
             },
@@ -48,7 +65,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             hintText: "Password",
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'please enter a valid email';
+                return 'please enter a valid password';
               }
             },
             isObscureText: isObscureText,
@@ -75,5 +92,10 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         ],
       ),
     );
+  }
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 }
