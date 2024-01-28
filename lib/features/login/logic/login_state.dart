@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'login_state.freezed.dart';
 
 @Freezed()
-class LoginState<T> with _$LoginState<T> {
+class LoginState <T> with _$LoginState<T> {
   const factory LoginState.initial() = _Intial;
 
   const factory LoginState.loading() = Loading;

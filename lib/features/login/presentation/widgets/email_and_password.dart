@@ -44,7 +44,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
+      return Form(
       key: context.read<LoginCubit>().formKey,
       child: Column(
         children: [
